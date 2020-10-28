@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    default: "username",
+  },
   surname: String,
   email: {
     type: String,
@@ -15,7 +18,10 @@ const userSchema = mongoose.Schema({
   avatar: String,
   gender: String,
   birthday: Date,
-  status: String,
+  status: {
+    type: String,
+    default: "студент",
+  },
   pongrecords: String,
   kickrecords: String,
   pulluprecords: String,
