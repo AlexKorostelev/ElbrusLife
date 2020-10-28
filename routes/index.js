@@ -24,18 +24,25 @@ router.get('/login', async (req, res, next) => {
   res.redirect('/');
 });
 
-router.post('/login', async (req, res, next) => {
-  const { name, email, pass } = req.body;
-  const user = await User.findOne({ email });
+/* Регистрация */
+router.get('/registration', async (req, res, next) => {
+  // res.render('registration');
+  res.redirect('/');
+});
 
-  if (user) {
-    alert('Такой пользователь уже существует!');
+router.post('/registration', async (req, res, next) => {
+  const user = req.body; // Загружаем данные, переданные с фронта по fetch на POST-ручку
+  const userExist = await User.findOne({ email: user.email }); // Ищем в базе юзера с подобным email
+
+  if (userExist) {
+    res.render('layout', { msgUserExist: 'Такой пользователь уже существует!' });
+    console.log('ЮЗЕР С ТАКИМ EMAIL УЖЕ СУЩЕСТВУЕТ!');
     return;
   }
-  const newuser = new User({ name, email, pass });
+  const newuser = new User(user);
   await newuser.save();
-  req.session.name = name;
-  console.log('REGISTRATION USER CREATED AND SAVED IN DB!', name);
+  req.session.user = user; // Заносим объект user в сессию
+  console.log('REGISTRATION USER CREATED AND SAVED IN DB!', user);
 });
 
 /* Выход из профиля */
@@ -43,11 +50,6 @@ router.get('/logout', async (req, res, next) => {
   console.log('ЗАШЛИ В LOGOUT!');
   req.session.destroy(); // удаляем сессию
   res.redirect('/');
-});
-
-/* Регистрация */
-router.get('/registration', async (req, res, next) => {
-  res.render('registration');
 });
 
 module.exports = router;
