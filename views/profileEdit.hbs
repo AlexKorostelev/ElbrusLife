@@ -1,0 +1,31 @@
+<div id="editprofile">Редактировать профиль
+  <a href="/profile"><button id="viewprofile">Посмотреть профиль</button></a>
+</div>
+<hr>
+<div class="aboutme">Основная информация</div>
+<form action="/profile/edit" method="POST" enctype="multipart/form-data">
+{{!-- multer --}}
+<input name="avatar" type="file" placeholder="Изменить фото" />
+<button class="removephoto">Удалить фото</button>
+<br>
+<label for="name">Имя</label>
+<input name="name" type="text" placeholder="Введите имя" />
+<br>
+<label for="surname">Фамилия</label>
+<input name="surname" type="text" value="Фамилия" placeholder="Введите фамилию" />
+<br>
+<label for="gender">Пол</label>
+<select name="usergender" id="usergender">
+  <option value="male">мужской</option>
+  <option value="female">женский</option>
+  <option value="other">другое</option>
+</select>
+<br>
+<label for="birthday">День рождения</label>
+<input name="birthday" type="date" />
+<br>
+<label for="useremail">Email</label>
+<input name="useremail" type="email" placeholder="email" />
+<br>
+<button type="submit">Отправить</button>
+</form>
