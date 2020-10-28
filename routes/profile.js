@@ -4,7 +4,7 @@ const router = express.Router();
 const multer = require('multer');
 const User = require('../models/user');
 
-// Set Storage Engine
+// Set Storage Engine for loading image
 const storage = multer.diskStorage({
   destination: './public/uploads/',
   filename: function(req, file, cb) {
@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
   }
 });
 
-// Init Upload
+// Init Upload for loading image
 const upload = multer({
   storage: storage,
   limits: {fileSize: 1000000},
@@ -23,7 +23,7 @@ const upload = multer({
 
 // Check file type
 function checkFileType(file, cb) {
-  // expression for Alowed extenstion
+  // expression for allowed extenstions
   const filetypes = /jpeg|jpg|png|gif/;
   // Check ext
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -37,12 +37,12 @@ function checkFileType(file, cb) {
   }
 }
 
+
 /* GET rendering with info of user */
 router.get('/', async (req, res) => {
-  console.log('--------------------');
-  const obj = { email: 'mr.burbu@mail.ru' };
-  const { name, surname, email, gender, birthday, status } = await User.findOne(obj);
-  console.log(name, surname, email, gender, birthday, status);
+  // console.log('--------------------');
+  const { name, surname, email, gender, birthday, status } = await User.findOne({email: res.locals.user.email});
+  // console.log(name, surname, email, gender, birthday, status);
   res.render('profile', { name, surname, email, gender, birthday, status });
 });
 
@@ -66,16 +66,19 @@ router.post('/edit', async (req, res) => {
       res.send('test');
     }
   });
-  const email = { email: 'mr.burbu@mail.ru' }; // req.session.user.email
-  const user = await User.findOneAndUpdate(email, {
+  
+  const email = res.locals.user.email;
+  /* object with req.body info */
+  const userbody = {
     name: req.body.name,
     surname: req.body.surname,
     gender: req.body.gender,
     birthday: req.body.gender,
     useremail: req.body.useremail,
-  });
-  // console.log(req.body);
-  req.session.user = user; // after user registered and logged in there is a session.user with email and password
+  }
+  const user = await User.findOneAndUpdate({email}, {userbody}); // waiting for login or registration
+  console.log(user);
+  req.session.user = userbody; // after user registered and logged in there is a session.user with email and password
   res.render('profile');
 });
 

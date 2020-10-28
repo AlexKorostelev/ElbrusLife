@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // Public folder
 // middleware for session - saving cookies
 app.use(session({
   store: new MongoStore({ // storing in mongodb via mongostore
-    mongooseConnection: mongoose.createConnection('mongodb://localhost:27017/elbruslife', { useNewUrlParser: true, useUnifiedTopology: true }),
+    mongooseConnection: mongoose.createConnection('mongodb://localhost:27017/elbruslife', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }),
   }),
   secret: 'rg9ii645terg9hjio6k5elrpf',
   resave: false,
@@ -36,7 +36,7 @@ app.use(session({
 
 // middleware to create res locals so we can get user info on any route
 app.use( async (req, res, next) => {
-  res.locals.user = req.session.user // Саша, запихни пожалуйста в req.session.USER информацию после регистрации
+  res.locals.user = req.session?.user // Саша, запихни пожалуйста в req.session.USER информацию после регистрации
   next();
 })
 
