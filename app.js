@@ -3,11 +3,18 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const MongoStore = require('connect-mongo')(session); // хранилице для сессий. можно использловать другие: https://github.com/expressjs/session#compatible-session-stores
 
 const app = express();
+
+// Подключаем mongoose.
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/blog', { useNewUrlParser: true, useUnifiedTopology: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,6 +25,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.createConnection('mongodb://localhost:27017/blog', { useNewUrlParser: true, useUnifiedTopology: true }),
+  }),
+  secret: 'rg9ii645terg9hjio6k5elrpfse',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, maxAge: 999999999999999 },
+}));
+
+app.use('/', (req, res, next) => {
+  res.locals.user = req.session?.user;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
