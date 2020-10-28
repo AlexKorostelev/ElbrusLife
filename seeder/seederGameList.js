@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/ElbrusLife', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const GameList = require('./models/gameList.js');
+const GameList = require('../models/gameList.js');
 
 const GameList = [{
         gameName: "Киккер",

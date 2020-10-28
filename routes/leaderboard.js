@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
     res.render('leaderboard');
 });
 
-router.post('/', ())
+// router.post('/', ())
 
 
 module.exports = router;
