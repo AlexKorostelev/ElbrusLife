@@ -1,25 +1,25 @@
+import express from 'express';
 import createError from 'http-errors';
-import express, { json, urlencoded, static } from 'express';
-import { join } from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import path from 'path';
 
-import indexRouter from './routes/index';
-import scheduleRouter from './routes/schedule';
-import usersRouter from './routes/users';
-import leaderboardRouter from 'routes/leaderboard';
+import indexRouter from './routes/index.js';
+import scheduleRouter from './routes/schedule.js';
+import usersRouter from './routes/users.js';
+import leaderboardRouter from './routes/leaderboard';
 
 const app = express();
 
 // view engine setup
-app.set('views', join(__dirname, 'views'));
+app.set('views', 'views');
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
-app.use(json());
-app.use(urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(static(join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
