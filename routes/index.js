@@ -20,11 +20,11 @@ router.get('/', (req, res) => {
 });
 
 /* Авторизация */
-router.get('/login', async (req, res, next) => {
+router.get('/login', async (req, res) => {
   res.redirect('/');
 });
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', async (req, res) => {
   const user = req.body;
   const userdb = await User.findOne({ email: user.email });
   // console.log('POST /login', userdb);
@@ -33,7 +33,7 @@ router.post('/login', async (req, res, next) => {
     if (userdb.password === user.password) {
       req.session.user = userdb;
       // console.log('LOGIN, ПАРОЛЬ СОВПАЛ!!! ЗАЛОГИНИЛИСЬ КАК ===>', userdb.name);
-      return res.sendStatus(200);
+      res.sendStatus(200);
     }
   }
   // console.log('LOGIN, НЕВЕРНЫЙ ПАРОЛЬ!');
@@ -41,12 +41,12 @@ router.post('/login', async (req, res, next) => {
 });
 
 /* Регистрация */
-router.get('/registration', async (req, res, next) => {
+router.get('/registration', async (req, res) => {
   // res.render('registration');
   res.redirect('/');
 });
 
-router.post('/registration', async (req, res, next) => {
+router.post('/registration', async (req, res) => {
   const user = req.body; // Загружаем данные, переданные с фронта по fetch на POST-ручку
   const userExist = await User.findOne({ email: user.email }); // Ищем в базе юзера с подобным email
 
@@ -63,7 +63,7 @@ router.post('/registration', async (req, res, next) => {
 });
 
 /* Выход из профиля */
-router.get('/logout', async (req, res, next) => {
+router.get('/logout', async (req, res) => {
   // console.log('ЗАШЛИ В LOGOUT!');
   req.session.destroy(); // удаляем сессию
   res.redirect('/');

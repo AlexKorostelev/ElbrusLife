@@ -5,13 +5,14 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "npx kill-port 3322; nodemon app.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
     "express-session": "^1.17.1",
     "hbs": "~4.0.4",

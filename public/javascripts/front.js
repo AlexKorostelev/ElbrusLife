@@ -19,7 +19,7 @@ document.getElementById('bnAddUser').addEventListener('click', async () => {
   console.log('ФЕЧ POST на /registration ОТПРАВЛЕН!'); */
 });
 
-document.getElementById('bnLogin').addEventListener('click', async (e) => {
+document.getElementById('bnLogin').addEventListener('click', async () => {
   const email = document.getElementById('defaultForm-email').value;
   const pass = document.getElementById('defaultForm-pass').value;
   // console.log('/login CLICK!');

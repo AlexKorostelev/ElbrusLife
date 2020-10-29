@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-body {
-    padding: 50px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-    color: #00B7FF;
-}
-
-div.game {
-    display: flex;
-    justify-content: center;
-=======
 /* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -25,5 +11,4 @@ a {
   font-size: 25px;
   /* margin-right: 50px; */
   margin-right: 50px, 40, 30;
->>>>>>> 7fa47663b17fd229694eaaabcfc65257eae17adb
 }
