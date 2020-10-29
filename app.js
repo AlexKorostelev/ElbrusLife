@@ -39,16 +39,25 @@ app.use(session({
 }));
 
 // middleware to create res locals so we can get user info on any route
-app.use( async (req, res, next) => {
+app.use(async (req, res, next) => {
   res.locals.user = req.session?.user;
   console.log(res.locals.user, 'RES LOCALS MIDDLEWARE USER');
   next();
-})
+});
+
+// checking if user logged in (if username in req.session)
+const CheckUser = (req, res, next) => {
+  const sessionUser = req.session?.user;
+  if (!sessionUser) {
+    return res.redirect('/');
+  }
+  next();
+}
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/profile', profileRouter);
-app.use('/leaderboard', leaderBoardRouter);
+app.use('/users', CheckUser, usersRouter);
+app.use('/profile', CheckUser, profileRouter);
+app.use('/leaderboard', CheckUser, leaderBoardRouter);
 
 // catch 404
 app.use((req, res, next) => {
