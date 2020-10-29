@@ -6,11 +6,11 @@ const GameListSchema = new mongoose.Schema({
         required: true,
     },
     idUserVinner: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
     idUser2: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
     gameRank: {

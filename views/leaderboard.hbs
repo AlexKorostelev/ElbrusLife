@@ -2,10 +2,11 @@
 <!-- Здесь помещаются JS файлы. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<nav class="wrapper">
+<h2 style="font-weight: bolder;">{{user.name}} {{user.surname}}</h2>
+</nav> 
 
-<h2>{{user.name}} {{user.surname}}</h2>
-<br>
-<br>
+{{!-- <img src="/img/IMG_2554.jpg" class="img-fluid" alt="Адаптивные изображения"> --}}
   <!-- The Modal -->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -28,11 +29,16 @@
           </div>
          <div class="form-group">
             <label for="recipient-name" class="col-form-label">Победитель:</label>
-            <h2 id="vinnerName">{{user.name}}</h2>
+            <select class="custom-select" name="fioVinner" id="fioVinner" multiple>
+              {{#each usersInListSelect}}
+               <option value="{{this._id}}">{{this.name}} {{this.surname}}</option>
+              {{/each}}
+            </select>
+            {{!-- <h2 id="vinnerName">{{user.name}} {{user.surname}}</h2> --}}
           </div>
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">Выбери оппонента:</label>
-            <select class="custom-select" name="fio" id="opponentNameSelect" multiple>
+            <select class="custom-select" name="fioOpponent" id="fioOpponent" multiple>
               {{#each usersInListSelect}}
                <option value="{{this._id}}">{{this.name}} {{this.surname}}</option>
               {{/each}}
@@ -42,48 +48,41 @@
             <label for="recipient-name" class="col-form-label">Счёт:</label>
             <input type="text" class="form-control" name="gameRank" id="gameRank" placeholder="Введи счёт игры">
           </div>
+           <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-primary" id="gameForm">Сохранить игру!</button>
+      </div>
         </form>
         </div>
         
         <!-- Modal footer -->
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-        <button type="button" class="btn btn-primary">Сохранить игру!</button>
-      </div>
+       
       </div>
     </div>
  </div>
 
-<h3>Киккер</h3>
- <div class="game">
-  <table class="table table-hover table-dark" >
+<div class="row" >
+
+<div class="col-md-4" style="margin:0 auto">
+ <table class="table table-striped table-dark">
   <thead>
-    <tr></tr>
+    <tr><h2>Настольный теннис</h2></tr>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Имя победителя</th>
+      {{!-- <th scope="col">#</th> --}}
+       <th scope="col">Имя победителя</th>
       <th scope="col">Оппонент</th>
       <th scope="col">Счёт</th>
     </tr>
   </thead>
   <tbody>
+       {{#each gameListForTennis}}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      {{!-- <th scope="row"></th> --}}
+    <td>{{this.idUserVinner.name}} {{this.idUserVinner.surname}}</td> 
+    <td>{{this.idUser2.name}} {{this.idUser2.surname}}</td>
+    <td>{{this.gameRank}}</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+{{/each}}
   </tbody>
 </table>
 </div>
@@ -91,42 +90,35 @@
 <br>
 <br>
 
-<div class="game">
- <table class="table table-hover table-dark">
+<div class="col-md-4">
+ <table class="table table-striped table-dark">
   <thead>
-    <tr><h3>Настольный теннис</h3></tr>
+    <tr><h2>Киккер</h2></tr>
+
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Имя победителя</th>
+      {{!-- <th scope="col">#</th> --}}
+       <th scope="col">Имя победителя</th>
       <th scope="col">Оппонент</th>
       <th scope="col">Счёт</th>
     </tr>
   </thead>
   <tbody>
+       {{#each gameListForTableKikker}}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      {{!-- <th scope="row"></th> --}}
+    <td>{{this.idUserVinner.name}} {{this.idUserVinner.surname}}</td> 
+    <td>{{this.idUser2.name}} {{this.idUser2.surname}}</td>
+    <td>{{this.gameRank}}</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+{{/each}}
   </tbody>
 </table>
 </div>
 
 
 <br>
-<br>
- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    Создать игру
+</div>
+ <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="buttonForm">
+    Создать игру!
   </button>
+

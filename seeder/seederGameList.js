@@ -1,23 +1,35 @@
+const GameList = require('../models/gameList.js');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/ElbrusLife', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const GameList = require('../models/gameList.js');
+mongoose.connect('mongodb://localhost:27017/elbruslife', { autoIndex: false, useNewUrlParser: true, useUnifiedTopology: true });
 
-const GameList = [{
+const gamers = [{
         gameName: "Киккер",
-        idUserVinner: [{ _id: '5f6ca27f6b92624d947f0361' }],
-        idUser2: [{ _id: '5f6ca27f6b92624d947f0361' }],
-        gameRank: "3:0"
+        idUserVinner: { _id: '5f99b0c79d9e60240ede9845' },
+        idUser2: { _id: '5f99b0c79d9e60240ede9846' },
+        gameRank: "3:0",
     },
     {
         gameName: "Настольный теннис",
-        idUserVinner: [{ _id: '5f6ca27f6b92624d947f0361' }],
-        idUser2: [{ _id: '5f6ca27f6b92624d947f0361' }],
-        gameRank: "3:0"
+        idUserVinner: { _id: '5f99b0c79d9e60240ede9847' },
+        idUser2: { _id: '5f99b0c79d9e60240ede9846' },
+        gameRank: "3:0",
+    },
+    {
+        gameName: "Киккер",
+        idUserVinner: { _id: '5f99b0c79d9e60240ede9845' },
+        idUser2: { _id: '5f99b0c79d9e60240ede9846' },
+        gameRank: "3:0",
+    },
+    {
+        gameName: "Настольный теннис",
+        idUserVinner: { _id: '5f99b0c79d9e60240ede9847' },
+        idUser2: { _id: '5f99b0c79d9e60240ede9846' },
+        gameRank: "3:0",
     },
 ];
 
-GameList.insertMany(GameList).then(() => {
+GameList.insertMany(gamers).then(() => {
     mongoose.connection.close();
 });
