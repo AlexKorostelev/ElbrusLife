@@ -37,6 +37,7 @@ app.use(session({
 // middleware to create res locals so we can get user info on any route
 app.use( async (req, res, next) => {
   res.locals.user = req.session?.user // Саша, запихни пожалуйста в req.session.USER информацию после регистрации
+  console.log(res.locals.user, 'RES LOCALS MIDDLEWARE USER');
   next();
 })
 

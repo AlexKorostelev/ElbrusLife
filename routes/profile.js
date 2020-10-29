@@ -40,46 +40,66 @@ function checkFileType(file, cb) {
 
 /* GET rendering with info of user */
 router.get('/', async (req, res) => {
+  console.log('res.locals.user.email', res.locals.user);
   // console.log('--------------------');
-  const { name, surname, email, gender, birthday, status } = await User.findOne({email: res.locals.user.email});
+  const user = await User.findOne({email: res.locals.user.email});
+  let newDate;
+  if (user.birthday) {
+    const day = user.birthday.getUTCDate();
+    const month = user.birthday.getUTCMonth() + 1;
+    const year = user.birthday.getUTCFullYear()
+    newDate = day + '/' + month + '/' + year;
+  }
+  res.render('profile', {
+    name: user.name,
+    surname: user.surname,
+    avatar: user.avatar,
+    email: user.email,
+    gender: user.gender,
+    birthday: newDate,
+    status: user.status
+  });
   // console.log(name, surname, email, gender, birthday, status);
-  res.render('profile', { name, surname, email, gender, birthday, status });
 });
 
 /* editing profile get REQUEST */
 router.get('/edit', (req, res) => {
-  res.render('profileEdit');
+  if (!res.locals.user) {
+    res.locals.user = {};
+    res.locals.user.avatar = "defult.jpeg";
+  }
+  res.render('profileEdit', {
+    name: res.locals.user?.name,
+    surname: res.locals.user?.surname,
+    avatar: res.locals.user.avatar,
+    email: res.locals.user.email,
+    gender: res.locals.user?.gender,
+    birthday: res.locals.user?.birthday,
+    status: res.locals.user.stauts});
 });
 
 /* saving user edits */
 router.post('/edit', async (req, res) => {
-  upload(req, res, (err) => {
+  upload(req, res, async (err) => { // saving img into upload file
     if(err) {
-      res.render('index', {message: err})
+      res.render('profileEdit', {message: err});
+      console.log(req.file, '<<<<<<<< req File in UPLOAD');
     } else {
-      if (req.file === undefined) {
-        res.render('index', {message: 'no file selected'})
-      } else {
-        res.render('index', {message: 'file uploaded',file: `uploads/${req.file.filename}`}) 
-      }
-      console.log(req.file);
-      res.send('test');
+      /* object with req.body info */
+      const user = await User.findOneAndUpdate({email: res.locals.user.email}, {$set: {
+        name: req.body.name,
+        surname: req.body.surname,
+        avatar: req.file.filename,
+        gender: req.body.usergender,
+        birthday: req.body.birthday,
+        email: req.body.email,
+      }}, {new: true}); // waiting for login or registration
+      console.log(user, '<<<< USER in DB');
+      req.session.user = userbody; // after user registered and logged in there is a session.user with email and password
+      console.log(req.session.user , '<<<<<<<<<<REQ SES USER');
+      res.redirect('/profile');
     }
   });
-  
-  const email = res.locals.user.email;
-  /* object with req.body info */
-  const userbody = {
-    name: req.body.name,
-    surname: req.body.surname,
-    gender: req.body.gender,
-    birthday: req.body.gender,
-    useremail: req.body.useremail,
-  }
-  const user = await User.findOneAndUpdate({email}, {userbody}); // waiting for login or registration
-  console.log(user);
-  req.session.user = userbody; // after user registered and logged in there is a session.user with email and password
-  res.render('profile');
 });
 
 module.exports = router;
