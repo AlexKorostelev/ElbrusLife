@@ -1,5 +1,5 @@
 {{!-- ==================================================================== --}}
-
+{{!-- <form action="/login" method="POST"> --}}
 <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -21,6 +21,9 @@
           <i class="fas fa-lock prefix grey-text"></i>
           <input type="password" id="defaultForm-pass" class="form-control validate">
           <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+
+          <p style="color:red" id="errLogin"></p>
+
         </div>
 
       </div>
@@ -30,4 +33,5 @@
     </div>
   </div>
 </div>
+{{!-- </form> --}}
 {{!-- ==================================================================== --}}
