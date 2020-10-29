@@ -15,7 +15,10 @@ const userSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  avatar: String,
+  avatar: {
+    type: String,
+    default: "defult.jpeg"
+  },
   gender: String,
   birthday: Date,
   status: {

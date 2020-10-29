@@ -4,19 +4,23 @@ const cookieParser = require('cookie-parser'); // to save cookie from client int
 const mongoose = require('mongoose');
 const session = require('express-session'); // to control sessions
 const MongoStore = require('connect-mongo')(session); // to store in MongoDB
+const hbs = require('hbs');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const profileRouter = require('./routes/profile');
 const leaderBoardRouter = require('./routes/leaderboard');
 
+
 // mongoose connection
 mongoose.connect('mongodb://localhost:27017/elbruslife', {useNewUrlParser: true, useUnifiedTopology: true, autoIndex: false}).then(() => console.log('Mongoose connected!')).catch(() => console.log('Error!'));
 const app = express();
 
+
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', 'views');
 app.set('view engine', 'hbs');
+hbs.registerPartials(`${__dirname}/views/partials`);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // so we can send data from post requests
@@ -31,16 +35,16 @@ app.use(session({
   secret: 'rg9ii645terg9hjio6k5elrpf',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false, maxAge: 4599678, httpOnly: false, },
+  cookie: { secure: false, maxAge: 999999999999999, httpOnly: false, },
 }));
 
 // middleware to create res locals so we can get user info on any route
 app.use( async (req, res, next) => {
-  res.locals.user = req.session?.user // Саша, запихни пожалуйста в req.session.USER информацию после регистрации
+  res.locals.user = req.session?.user;
+  console.log(res.locals.user, 'RES LOCALS MIDDLEWARE USER');
   next();
 })
 
-// routers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/profile', profileRouter);

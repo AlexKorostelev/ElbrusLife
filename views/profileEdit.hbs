@@ -1,31 +1,41 @@
-<div id="editprofile">Редактировать профиль
+<div id="editprofileHeader">Редактировать профиль
   <a href="/profile"><button id="viewprofile">Посмотреть профиль</button></a>
 </div>
 <hr>
 <div class="aboutme">Основная информация</div>
-<form action="/profile/edit" method="POST" enctype="multipart/form-data">
-{{!-- multer --}}
-<input name="avatar" type="file" placeholder="Изменить фото" />
+ {{!-- FORM --}}
+<form id="editForm" action="/profile/edit" method="POST" enctype="multipart/form-data">
+{{!-- multer for img - saves the img but keeps path in bd --}}
+{{#if imgsource}}
+<img src=`{{imgsource}}` style="width: 100px; height: 100px">
+{{else}}
+<img src="/uploads/defult.jpeg" alt="default logo" height="100px" width="100px">
+{{/if}}
+{{!-- message for err --}}
+{{message}}
+<input id="avatar" name="avatar" type="file" placeholder="Изменить фото" />
 <button class="removephoto">Удалить фото</button>
-<br>
+<div id="errMsg" class="errMsg"></div>
+{{!-- name type string --}}
 <label for="name">Имя</label>
-<input name="name" type="text" placeholder="Введите имя" />
+<input name="name" type="text" placeholder="Введите имя" value="{{name}}" />
 <br>
 <label for="surname">Фамилия</label>
-<input name="surname" type="text" value="Фамилия" placeholder="Введите фамилию" />
-<br>
+<input name="surname" type="text" value="{{surname}}" placeholder="Введите фамилию" />
+<br> {{!-- gender select --}}
 <label for="gender">Пол</label>
-<select name="usergender" id="usergender">
+<select name="usergender" id="usergender" value="{{gender}}">
+  <option value="other">другое</option>
   <option value="male">мужской</option>
   <option value="female">женский</option>
-  <option value="other">другое</option>
 </select>
-<br>
+<br> {{!-- birthday type: date --}}
 <label for="birthday">День рождения</label>
-<input name="birthday" type="date" />
-<br>
+<input name="birthday" type="date" value="{{birthday}}" />
+<br> {{!-- email type email but in bd string --}}
 <label for="useremail">Email</label>
-<input name="useremail" type="email" placeholder="email" />
-<br>
-<button type="submit">Отправить</button>
+<input name="email" type="email" placeholder="email" value="{{email}}"/>
+<br> {{!-- submit button --}}
+<button id="editBtn" type="submit">Сохранить</button>
 </form>
+<script src="/js/profile.js"></script>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -10,6 +11,7 @@ a {
 div.game {
     display: flex;
     justify-content: center;
+<<<<<<< HEAD
 }
 
 
@@ -60,4 +62,21 @@ div.game {
     color: #ccc;
     padding-top: 20%;
     text-shadow: 1px 1px 2px black, 0 0 1em rgb(80, 80, 80);
+=======
+=======
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+} */
+
+.cmenu {
+  font-size: 25px;
+  /* margin-right: 50px; */
+  margin-right: 50px, 40, 30;
+>>>>>>> 7fa47663b17fd229694eaaabcfc65257eae17adb
+>>>>>>> be1530ba00c9ca48b4c653f3609a025873736a09
 }

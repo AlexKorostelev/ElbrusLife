@@ -31,10 +31,15 @@ const users = [{
   status: 'студент',
 }];
 
-User.insertMany(users).then(() => {
-  mongoose.connection.close();
-  console.log('DB is seeded!');
-}).catch(() => {
-  console.log('Duplicate!');
-  mongoose.connection.close();
-});
+const seed = async () => {
+  await mongoose.connection.dropDatabase();
+  User.insertMany(users).then(() => {
+    mongoose.connection.close();
+    console.log('DB is seeded!');
+  }).catch(() => {
+    console.log('Duplicate!');
+    mongoose.connection.close();
+  });
+}
+
+seed();
