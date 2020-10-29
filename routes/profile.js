@@ -75,7 +75,7 @@ router.get('/edit', (req, res) => {
     email: res.locals.user.email,
     gender: res.locals.user?.gender,
     birthday: res.locals.user?.birthday,
-    status: res.locals.user.stauts});
+    status: res.locals.user.status});
 });
 
 /* saving user edits */
@@ -95,7 +95,7 @@ router.post('/edit', async (req, res) => {
         email: req.body.email,
       }}, {new: true}); // waiting for login or registration
       console.log(user, '<<<< USER in DB');
-      req.session.user = userbody; // after user registered and logged in there is a session.user with email and password
+      res.locals.user = user; // after user registered and logged in there is a session.user with email and password
       console.log(req.session.user , '<<<<<<<<<<REQ SES USER');
       res.redirect('/profile');
     }
