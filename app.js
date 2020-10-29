@@ -1,18 +1,20 @@
-import express from 'express';
-import createError from 'http-errors';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-import path from 'path';
+const express = require('express');
+const createError = require('http-errors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
-import indexRouter from './routes/index.js';
-import scheduleRouter from './routes/schedule.js';
-import usersRouter from './routes/users.js';
-import leaderboardRouter from './routes/leaderboard';
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const schedulesRouter = require('./routes/schedules');
 
 const app = express();
 
+mongoose.connect('mongodb://localhost:27017/schedule', { useNewUrlParser: true, useUnifiedTopology: true });
+
 // view engine setup
-app.set('views', 'views');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
@@ -23,8 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/schedule', scheduleRouter);
-app.use('/leaderboard', leaderboardRouter);
+app.use('/schedules', schedulesRouter);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -32,7 +34,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -41,7 +43,13 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error');
 });
+// app.use(
+//   (req, res, next) => {
+//     res.locals.username = schedules.lesson;
+//     next();
+//   }
+// )
 
 app.listen(3000);
 
-// export default app;
+module.exports = app;
