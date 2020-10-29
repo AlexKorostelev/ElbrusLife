@@ -32,7 +32,7 @@ document.getElementById('bnLogin').addEventListener('click', async (e) => {
   });
   const msg = await result.text();
 
-  if (msg === 'Неверный пароль!') document.getElementById('errLogin').innerHTML = msg;
+  if (msg === 'Неверный логин / пароль!') document.getElementById('errLogin').innerHTML = msg;
   else if (result.status === 200) window.location = '/';
   // console.log('ФЕЧ POST на /login ОТПРАВЛЕН!');
 });

@@ -1,8 +1,14 @@
-body {
+/* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+} */
+
+.cmenu {
+  font-size: 25px;
+  /* margin-right: 50px; */
+  margin-right: 50px, 40, 30;
 }

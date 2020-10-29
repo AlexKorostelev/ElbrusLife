@@ -4,15 +4,15 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 
-const checkUser = (req, res, next) => {
+/* const checkUser = (req, res, next) => {
   const sessionUser = req.session?.name;
   console.log('SESSION_USER===>', sessionUser);
   if (!sessionUser) {
-    console.log('Пользователь не найден!!!');
+    // console.log('Пользователь не найден!!!');
     return res.redirect('/login');
   }
   next();
-};
+}; */
 
 /* Main page. */
 router.get('/', (req, res) => {
@@ -37,7 +37,7 @@ router.post('/login', async (req, res, next) => {
     }
   }
   // console.log('LOGIN, НЕВЕРНЫЙ ПАРОЛЬ!');
-  res.render('error', { message: 'Неверный пароль!', layout: false });
+  res.render('error', { message: 'Неверный логин / пароль!', layout: false });
 });
 
 /* Регистрация */
@@ -52,19 +52,19 @@ router.post('/registration', async (req, res, next) => {
 
   if (userExist) {
     res.render('error', { message: 'Пользователь с таким email уже зарегистрирован!', layout: false });
-    console.log('ЮЗЕР С ТАКИМ EMAIL УЖЕ СУЩЕСТВУЕТ!');
+    // console.log('ЮЗЕР С ТАКИМ EMAIL УЖЕ СУЩЕСТВУЕТ!');
     return;
   }
   const newuser = new User(user);
   await newuser.save();
   req.session.user = user; // Заносим объект user в сессию
   res.render('index', { name: user.name });
-  console.log('REGISTRATION USER CREATED AND SAVED IN DB!', user);
+  // console.log('REGISTRATION USER CREATED AND SAVED IN DB!', user);
 });
 
 /* Выход из профиля */
 router.get('/logout', async (req, res, next) => {
-  console.log('ЗАШЛИ В LOGOUT!');
+  // console.log('ЗАШЛИ В LOGOUT!');
   req.session.destroy(); // удаляем сессию
   res.redirect('/');
 });

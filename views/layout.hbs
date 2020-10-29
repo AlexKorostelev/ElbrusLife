@@ -21,22 +21,28 @@
 </head>
 
 <body>
-  <H1>HEADER</H1>
-
   {{>login}}
   {{>registration}}
+  <div style="background-color: darkgray; height: 200px;">
+    <ul class="nav justify-content-end">
+      {{#if user.name}}
+      <li class="nav-item cmenu"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{user.name}}</a>
+      </li>
+      <li class="nav-item cmenu"><a class="nav-link" href="/logout">logout</a></li>
+      <li class="nav-item cmenu"><a class="nav-link" href="/">home</a></li>
+      {{else}}
+      </li>
+      <li class="nav-item cmenu"><a class="nav-link" href="/registration" data-toggle="modal"
+          data-target="#modalRegisterForm">register</a></li>
+      <li class="nav-item cmenu"><a class="nav-link" href="/login" data-toggle="modal" data-target="#modalLoginForm">login</a>
+      <li class="nav-item cmenu"><a class="nav-link" href="/">home</a></li>
+      {{/if}}
+    </ul>
+  </div>
 
-  <ul class="">
-    {{#if user.name}}
-    <li><b>{{user.name}}</b></li>
-    <li><a href="/">home</a></li>
-    <li><a href="/logout">logout</a></li>
-    {{else}}
-    <li><a href="/">home</a></li>
-    <li><a href="/registration" data-toggle="modal" data-target="#modalRegisterForm">register</a></li>
-    <li><a href="/login" data-toggle="modal" data-target="#modalLoginForm">login</a></li>
-    {{/if}}
-  </ul>
+
+
+
 
   {{{body}}}
 
