@@ -23,13 +23,16 @@
 <body>
   {{>login}}
   {{>registration}}
-  <div style="background-color: darkgray; height: 200px;">
+  {{!-- <div style="background-color: darkgray; height: 200px;"> --}}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <ul class="nav justify-content-end">
       {{#if user.name}}
       <li class="nav-item cmenu"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{user.name}}</a>
       </li>
       <li class="nav-item cmenu"><a class="nav-link" href="/logout">logout</a></li>
       <li class="nav-item cmenu"><a class="nav-link" href="/">home</a></li>
+      <li class="nav-item cmenu"><a class="nav-link" href="/leaderboard">leaderboard</a></li>
+      <li class="nav-item cmenu"><a class="nav-link" href="/profile">profile</a></li>
       {{else}}
       </li>
       <li class="nav-item cmenu"><a class="nav-link" href="/registration" data-toggle="modal"
@@ -38,8 +41,8 @@
       <li class="nav-item cmenu"><a class="nav-link" href="/">home</a></li>
       {{/if}}
     </ul>
-  </div>
-
+  {{!-- </div> --}}
+</nav>
 
 
 

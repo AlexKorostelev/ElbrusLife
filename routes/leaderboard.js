@@ -8,13 +8,16 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', async(req, res) => {
+    const userName = res.locals.user;
+    console.log(userName);
     //Переделать чтоб выводится юзер именно который аутентифицирован
-    const user = await User.findOne();
+    // const user = await User.findOne();
+    // console.log("++++++", user);
     //!!!111111111111111111!!!!!!!!!!!!!!!!1
-    const usersInListSelect = await User.find();
+    const usersInListSelect = await User.find({ name: userName });
     const gameListForTableKikker = await GameList.find({ gameName: "Киккер" }).populate('idUserVinner').populate('idUser2');
     const gameListForTennis = await GameList.find({ gameName: "Настольный теннис" }).populate('idUserVinner').populate('idUser2');
-    res.render('leaderboard', { user, usersInListSelect, gameListForTableKikker, gameListForTennis });
+    res.render('leaderboard', { userName, usersInListSelect, gameListForTableKikker, gameListForTennis });
 });
 
 router.post('/', async(req, res) => {
