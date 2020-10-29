@@ -3,9 +3,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-    Создать игру
-  </button>
+<h2>{{user.name}} {{user.surname}}</h2>
 <br>
 <br>
   <!-- The Modal -->
@@ -23,26 +21,26 @@
       </div>
         <!-- Modal body -->
         <div class="modal-body">
-          <form name="createNewGameForm" method="POST" action="/leaderboard">
+          <form name="createNewGameForm" id="createNewGameForm" method="POST" action="/leaderboard">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Игра:</label>
             <input type="text" class="form-control" id="gameName" name="gameName"placeholder="Киккер или Настольный Теннис" data-game="game">
           </div>
          <div class="form-group">
             <label for="recipient-name" class="col-form-label">Победитель:</label>
-            <h2 id="vinnerName">--->Cюда выводим победителя{{vinner}}</h2>
+            <h2 id="vinnerName">{{user.name}}</h2>
           </div>
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">Выбери оппонента:</label>
             <select class="custom-select" name="fio" id="opponentNameSelect" multiple>
-              {{!-- {{#each userName}} --}}
-               <option value="{{this._id}}">---->тут будет список{{this.name}}</option>
-              {{!-- {{/each}} --}}
+              {{#each usersInListSelect}}
+               <option value="{{this._id}}">{{this.name}} {{this.surname}}</option>
+              {{/each}}
             </select>
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Счёт:</label>
-            <input type="text" class="form-control" id="gameRank" placeholder="Введи счёт игры">
+            <input type="text" class="form-control" name="gameRank" id="gameRank" placeholder="Введи счёт игры">
           </div>
         </form>
         </div>
@@ -56,11 +54,11 @@
     </div>
  </div>
 
- 
+<h3>Киккер</h3>
  <div class="game">
   <table class="table table-hover table-dark" >
   <thead>
-    <tr><h3>Киккер</h3></tr>
+    <tr></tr>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Имя победителя</th>
@@ -125,3 +123,10 @@
   </tbody>
 </table>
 </div>
+
+
+<br>
+<br>
+ <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    Создать игру
+  </button>
