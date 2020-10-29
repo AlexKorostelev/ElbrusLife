@@ -14,13 +14,7 @@ router.get('/', async(req, res) => {
     res.render('leaderboard', { user, usersInListSelect });
 });
 
-// router.post('/', async(req, res) => {
-//     const { gameName, gameRank } = req.body;
-//     console.log(req.body);
-//     // const newGame = await new GameList({
-
-//     // })
-// })
+// router.post('/', ())
 
 
 module.exports = router;
