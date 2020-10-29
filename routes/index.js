@@ -4,16 +4,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 
-/* const checkUser = (req, res, next) => {
-  const sessionUser = req.session?.name;
-  console.log('SESSION_USER===>', sessionUser);
-  if (!sessionUser) {
-    // console.log('Пользователь не найден!!!');
-    return res.redirect('/login');
-  }
-  next();
-}; */
-
 /* Main page. */
 router.get('/', (req, res) => {
   res.render('index', { title: 'Express' });
@@ -27,22 +17,25 @@ router.get('/login', async (req, res) => {
 router.post('/login', async (req, res) => {
   const user = req.body;
   const userdb = await User.findOne({ email: user.email });
-  // console.log('POST /login', userdb);
+  // console.log('POST /login', userdb.name, userdb.email, userdb.password);
 
   if (userdb) {
     if (userdb.password === user.password) {
       req.session.user = userdb;
-      // console.log('LOGIN, ПАРОЛЬ СОВПАЛ!!! ЗАЛОГИНИЛИСЬ КАК ===>', userdb.name);
-      res.sendStatus(200);
+      console.log('LOGIN, ПАРОЛЬ СОВПАЛ!!! ЗАЛОГИНИЛИСЬ КАК ===>', userdb.name);
+      res.render('error', { message: '_', layout: false });
+      // res.sendStatus(200);
+      // res.status(200);
+    } else {
+      res.render('error', { message: 'Неверный логин / пароль!', layout: false });
     }
+  } else {
+    res.render('error', { message: 'Неверный логин / пароль!', layout: false }); // Юзер не найден
   }
-  // console.log('LOGIN, НЕВЕРНЫЙ ПАРОЛЬ!');
-  res.render('error', { message: 'Неверный логин / пароль!', layout: false });
 });
 
 /* Регистрация */
 router.get('/registration', async (req, res) => {
-  // res.render('registration');
   res.redirect('/');
 });
 

@@ -13,7 +13,7 @@ const profileRouter = require('./routes/profile');
 const leaderBoardRouter = require('./routes/leaderboard');
 
 // mongoose connection
-mongoose.connect('mongodb+srv://alex:nwFwmK8pxkqyh6sH@cluster0.uq8am.mongodb.net/elbruslife?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, autoIndex: false }).then(() => console.log('Mongoose connected!')).catch(() => console.log('Error!'));
+mongoose.connect(process.env.DB_CONN, { useNewUrlParser: true, useUnifiedTopology: true, autoIndex: false }).then(() => console.log('Mongoose connected!')).catch(() => console.log('Error!'));
 const app = express();
 
 // view engine setup
@@ -44,10 +44,19 @@ app.use(async (req, res, next) => {
   next();
 });
 
+// checking if user logged in (if username in req.session)
+function CheckUser(req, res, next) {
+  const sessionUser = req.session?.user;
+  if (!sessionUser) {
+    return res.redirect('/');
+  }
+  next();
+}
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/profile', profileRouter);
-app.use('/leaderboard', leaderBoardRouter);
+app.use('/users', CheckUser, usersRouter);
+app.use('/profile', CheckUser, profileRouter);
+app.use('/leaderboard', CheckUser, leaderBoardRouter);
 
 // catch 404
 app.use((req, res, next) => {

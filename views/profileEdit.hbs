@@ -7,14 +7,14 @@
 <form id="editForm" action="/profile/edit" method="POST" enctype="multipart/form-data">
 {{!-- multer for img - saves the img but keeps path in bd --}}
 {{#if imgsource}}
-<img src=`{{imgsource}}` style="width: 100px; height: 100px">
+<img id="avatarImg" src="/uploads/{{imgsource}}" style="width: 100px; height: 100px">
 {{else}}
 <img src="/uploads/defult.jpeg" alt="default logo" height="100px" width="100px">
 {{/if}}
 {{!-- message for err --}}
 {{message}}
 <input id="avatar" name="avatar" type="file" placeholder="Изменить фото" />
-<button class="removephoto">Удалить фото</button>
+<button id="deleteBtn" class="removephoto">Удалить фото</button>
 <div id="errMsg" class="errMsg"></div>
 {{!-- name type string --}}
 <label for="name">Имя</label>
@@ -28,6 +28,7 @@
   <option value="other">другое</option>
   <option value="male">мужской</option>
   <option value="female">женский</option>
+  <option selected="selected">{{gender}}</option>
 </select>
 <br> {{!-- birthday type: date --}}
 <label for="birthday">День рождения</label>
