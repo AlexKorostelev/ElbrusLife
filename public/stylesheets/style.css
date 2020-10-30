@@ -1,14 +1,33 @@
-<<<<<<< HEAD
-=======
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #0509c7;
 }
 
->>>>>>> 35efd530b0c6130e2823603392b9165c9bfaeecb
+.backgroundIndex{
+  background: url(https://cdn.pixabay.com/photo/2015/05/26/23/52/technology-785742_1280.jpg) no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-height: 210px;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px;
+  background-color: rgb(220, 221, 225, 0.8);
+}
+
 a {
   color: hsl(0, 0%, 0%);
+}
+
+a:hover {
+  color: #3ae374;
 }
 
 div.game {
@@ -37,6 +56,19 @@ div.game {
     text-align: center;
     color: #fff;
     font-size: 2em;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  height: 25px;
+  width: 100%;
+  background-color:#7f8fa699;
+  font-size: 16px;
+  font-family: Courier, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (min-width: 1001px) {
