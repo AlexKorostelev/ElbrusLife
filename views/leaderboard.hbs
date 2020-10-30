@@ -33,7 +33,7 @@
          <div class="form-group">
             <label for="recipient-name" class="col-form-label">Победитель:</label>
             <select class="custom-select" name="fioVinner" id="fioVinner" multiple>
-              {{#each usersInListSelect}}
+              {{#each arrUsersFilter}}
                <option value="{{this._id}}">{{this.name}} {{this.surname}}</option>
               {{/each}}
             </select>
@@ -42,7 +42,7 @@
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">Выбери оппонента:</label>
             <select class="custom-select" name="fioOpponent" id="fioOpponent" multiple>
-              {{#each usersInListSelect}}
+              {{#each arrUsersFilter}}
                <option value="{{this._id}}">{{this.name}} {{this.surname}}</option>
               {{/each}}
             </select>
