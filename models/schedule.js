@@ -4,10 +4,7 @@ const scheduleSchema = new mongoose.Schema({
     phase: Number,
     week: Number,
     day: Number,
-    lesson: [{
-      nameLesson: String,
-      timeLesson: String,
-    }]
+    lesson: Array
   });
 
 

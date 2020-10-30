@@ -7,13 +7,14 @@ sel_red.addEventListener('submit',async(e) => {
       const result = await fetch(`/schedules/${sel_red.dataset.id}/${sel_red.dataset.red}`, {
         method: 'POST',
         body: JSON.stringify({
-          timeLesson: e.target.teims.value,
+          timeLesson: e.target.times.value,
           nameLesson: e.target.textValue.value,
         }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
+      window.location.assign('/schedules');
     }
     );
     
