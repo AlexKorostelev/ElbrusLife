@@ -15,7 +15,7 @@ const schedulesRouter = require('./routes/schedules');
 // const logger = require('morgan');
 
 // mongoose connection
-mongoose.connect(process.env.DB_CONN, { useNewUrlParser: true, useUnifiedTopology: true, autoIndex: false }).then(() => console.log('Mongoose connected!')).catch(() => console.log('Error!'));
+mongoose.connect(process.env.DB_CONN, { useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true, autoIndex: false }).then(() => console.log('Mongoose connected!')).catch(() => console.log('Error!'));
 const app = express();
 
 // view engine setup
