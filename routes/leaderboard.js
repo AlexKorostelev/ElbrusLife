@@ -12,20 +12,36 @@ router.get('/', async(req, res) => {
 		//Для таблицы
     const gameListForTableKikker = await GameList.find({ gameName: "Киккер" }).populate('idUserVinner').populate('idUser2');
     const gameListForTennis = await GameList.find({ gameName: "Настольный теннис" }).populate('idUserVinner').populate('idUser2');
-    res.render('leaderboard', { userName, arrUsersFilter, gameListForTableKikker, gameListForTennis });
+		// console.log(gameListForTableKikker);
+		//для удаления игры
+		const allGame = await GameList.find().populate('idUserVinner').populate('idUser2');
+const filterGame = allGame.filter(e=> e.name =userName.name);
+		res.render('leaderboard', { userName, arrUsersFilter, gameListForTableKikker, gameListForTennis, filterGame });
 });
 
 router.post('/', async(req, res) => {
-    const { fioVinner, fioOpponent, gameName, gameRank } = req.body
-    // console.log(req.body);
+		const { fioOpponent, gameName, gameRank } = req.body
+		const userVinnerId = res.locals.user._id;
+		
     const newGame = new GameList({
         gameName: gameName,
-        idUserVinner: fioVinner,
+        idUserVinner: userVinnerId,
         idUser2: fioOpponent,
         gameRank: gameRank,
     });
-    await newGame.save()
+		await newGame.save()
     res.redirect("/leaderboard")
+});
+
+//
+router.delete('/delete', async(req, res) => {
+	const {gameId} = req.body
+	console.log('DELETE', gameId);
+// await GameList.findOneAndDelete(gameId, (err) => {
+// 	if (err) { return err; } return res.redirect("/leaderboard");
+// });
+await GameList.findOneAndDelete(gameId)
+return res.redirect("/leaderboard")
 });
 
 

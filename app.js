@@ -73,8 +73,8 @@ app.use((req, res, next) => {
 // )
 
 // log of error
-app.use((err) => {
-  console.error('err', err);
-});
+// app.use((err) => {
+//   console.error('err', err);
+// });
 
 app.listen(process.env.PORT, () => console.log(`Server is on ${process.env.PORT}`));

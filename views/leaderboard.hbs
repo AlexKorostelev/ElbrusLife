@@ -1,15 +1,15 @@
 <script defer src="./js/leaderboard.js"></script>
 <!-- Здесь помещаются JS файлы. -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script defer src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <nav class="wrapper"> 
 <h2 style="font-weight: bolder;">{{userName.name}} {{userName.surname}}</h2>
 <div><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id="buttonForm">
     Создать игру!
-  </button></div>
+  </button>
+	<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalDelete" id="buttonForm">Удалить игру...</button></div>
   </nav> 
 
-{{!-- <img src="/img/IMG_2554.jpg" class="img-fluid" alt="Адаптивные изображения"> --}}
   <!-- The Modal -->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -31,12 +31,12 @@
             <input type="text" class="form-control" id="gameName" name="gameName"placeholder="Киккер или Настольный Теннис" data-game="game">
           </div>
          <div class="form-group">
-            <label for="recipient-name" class="col-form-label">Победитель:</label>
-            <select class="custom-select" name="fioVinner" id="fioVinner" multiple>
-              {{#each arrUsersFilter}}
+            <label for="recipient-name" name="userVinnerId"class="col-form-label">Победитель:<h1>{{userName.name}} {{userName.surname}}</h1> </label>
+            {{!-- <select class="custom-select" name="fioVinner" id="fioVinner" multiple>
+              {{#each usersInListSelect}}
                <option value="{{this._id}}">{{this.name}} {{this.surname}}</option>
               {{/each}}
-            </select>
+            </select> --}}
             {{!-- <h2 id="vinnerName">{{user.name}} {{user.surname}}</h2> --}}
           </div>
            <div class="form-group">
@@ -54,6 +54,46 @@
            <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
         <button type="submit" class="btn btn-primary" id="gameForm">Сохранить игру!</button>
+      </div>
+        </form>
+        </div>
+        
+        <!-- Modal footer -->
+       
+      </div>
+    </div>
+ </div>
+
+
+{{!-- //Delete Modal --}}
+  <!-- The Modal -->
+  <div class="modal fade" id="myModalDelete">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Удалить игру</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form name="deleteGameForm" id="deleteGameForm" method="DELETE" action="/leaderboard">
+           <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Выбери игру для удаления:</label>
+            <select class="custom-select" name="gameNameDelete" id="gameForDeleteSelect" multiple>
+              {{#each filterGame}}
+               <option value="{{this._id}}">{{this.gameName}} 
+								 {{this.idUserVinner.name}} против {{this.idUser2.name}} -> {{this.gameRank}} </option>
+              {{/each}}
+            </select>
+          </div>
+           <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+        <button type="submit" class="btn btn-danger" id="gameFormDelete">Удалить игру!</button>
       </div>
         </form>
         </div>
