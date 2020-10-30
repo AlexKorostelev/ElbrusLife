@@ -1,5 +1,6 @@
-<div id="editprofileHeader">Редактировать профиль
-  <a href="/profile"><button id="viewprofile">Посмотреть профиль</button></a>
+<div id="editprofileHeader">
+  {{!-- <a href="/profile"><button id="viewprofile">Посмотреть профиль</button></a> --}}
+  <br>
 </div>
 <hr>
 <div class="aboutme">Основная информация</div>
@@ -21,32 +22,39 @@
 
 
   <div class="form-group">
-    <input name="name" type="text" placeholder="Введите имя" value="{{name}}" class="form-control" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Имя</small>
-  </div>
-  
-  <div class="form-group">
-    <input name="surname" type="text" placeholder="Введите фамилию" value="{{surname}}" class="form-control" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">Фамилия</small>
+    <input name="name" type="text" placeholder="Введите имя" value="{{name}}" class="form-control"
+      aria-describedby="emailHelp">
+    <small class="form-text text-muted">Имя</small>
   </div>
 
-{{!--   <label for="surname">Фамилия</label>
-  <input name="surname" type="text" value="{{surname}}" placeholder="Введите фамилию" /> --}}
-  <br> {{!-- gender select --}}
-  <label for="gender">Пол</label>
-  <select name="usergender" id="usergender" value="{{gender}}">
-    <option value="other">другое</option>
+  <div class="form-group">
+    <input name="surname" type="text" placeholder="Введите фамилию" value="{{surname}}" class="form-control"
+      aria-describedby="emailHelp">
+    <small class="form-text text-muted">Фамилия</small>
+  </div>
+
+  <div class="form-group"></div>
+  <select class="form-control" name="usergender" id="usergender" value="{{gender}}">
     <option value="male">мужской</option>
     <option value="female">женский</option>
-    <option selected="selected">{{gender}}</option>
   </select>
-  <br> {{!-- birthday type: date --}}
-  <label for="birthday">День рождения</label>
-  <input name="birthday" type="date" value="{{birthday}}" />
-  <br> {{!-- email type email but in bd string --}}
-  <label for="useremail">Email</label>
-  <input name="email" type="email" placeholder="email" value="{{email}}" />
-  <br> {{!-- submit button --}}
-  <button id="editBtn" type="submit">Сохранить</button>
+  <small class="form-text text-muted">Пол</small>
+  </div>
+  <br>
+  <div class="form-group">
+    <input name="birthday" type="date" placeholder="Введите дату рождения" value="{{birthdate}}" class="form-control"
+      aria-describedby="emailHelp">
+    <small class="form-text text-muted">Дата рождения</small>
+  </div>
+
+  <div class="form-group">
+    <input name="email" type="email" placeholder="Введите email" value="{{email}}" class="form-control"
+      aria-describedby="emailHelp">
+    <small class="form-text text-muted">Email</small>
+    <br>
+  </div>
+
+  <button class="btn btn-primary" id="editBtn" type="submit">Сохранить</button>
+
 </form>
 <script src="/js/profile.js"></script>

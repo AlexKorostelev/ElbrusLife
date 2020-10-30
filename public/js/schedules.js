@@ -29,8 +29,8 @@ async function ShowSchedules(e) {
     intervalid = setInterval(async () => {
       const dfs = Date.now();
       let tmp = new Intl.DateTimeFormat('ru-RU', { hour: "2-digit", minute: "2-digit" });
-      let tmpp = new Intl.DateTimeFormat('ru-RU', { second: "2-digit" });
-      let times = tmpp.format(new Date(dfs));
+      // let tmpp = new Intl.DateTimeFormat('ru-RU', { second: "2-digit" });
+      // let times = tmpp.format(new Date(dfs));
       let newtims = tmp.format(new Date(dfs))
       // console.log(+times);
 
