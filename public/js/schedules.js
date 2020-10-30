@@ -23,16 +23,17 @@ document.addEventListener('click', async (e) => {
       },
     });
     const response = await result.json();
+    console.log(response);
     intervalid = setInterval(async () => {
       const dfs = Date.now();
       let tmp = new Intl.DateTimeFormat('ru-RU', { hour: "2-digit", minute: "2-digit" });
       let tmpp = new Intl.DateTimeFormat('ru-RU', { second: "2-digit" });
       let times = tmpp.format(new Date(dfs));
       let newtims = tmp.format(new Date(dfs))
-      console.log(+times);
+      // console.log(+times);
 
-      for (let i = 0; i < response.length; i++) {
-        if (newtims === response[i].timeLesson) {
+      for (let i = 0; i < response.lesson.length; i++) {
+        if (newtims === response.lesson[i].timeLesson) {
           const aa = document.getElementById(String(i));
           console.log(aa);
           aa.classList.toggle("ok")
@@ -45,12 +46,26 @@ document.addEventListener('click', async (e) => {
 
     dd.innerText = "";
 
-    for (let i = 0; i < response.length; i++) {
-      const aa = document.createElement('div');
-      aa.id = '' + i
+    for (let i = 0; i < response.lesson.length; i++) {
+      const add = document.createElement('div');
+      add.id = '' + response.lesson[i]._id;
+      
+      const edit = document.createElement('a');
+      edit.text  = "Редактировать"; 
+      edit.href  = `/schedules/${response._id}/${response.lesson[i]._id}`;
+      edit.id  = '' + response.lesson[i]._id;
 
-      aa.innerText = response[i].timeLesson + ' ' + response[i].nameLesson;
-      dd.append(aa);
+      const del = document.createElement('a');
+      del.text  = "Удалить"; 
+      del.href  = `/schedules/${response._id}/${response.lesson[i]._id}`;
+      del.id  = '' + response.lesson[i]._id;
+      // console.log(ab);
+
+
+      add.innerText = response.lesson[i].timeLesson + ' ' + response.lesson[i].nameLesson;
+      dd.append(add, edit, del);
+      // dd.append(edit);
+      // dd.append(del);
     }
   }
 });
