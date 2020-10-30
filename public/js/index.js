@@ -12,7 +12,10 @@ document.getElementById('bnAddUser').addEventListener('click', async () => {
     body: JSON.stringify({ name, email, password }),
   });
   const msg = await result.text();
-  if (msg === 'Пользователь с таким email уже зарегистрирован!') document.getElementById('errRegistration').innerHTML = msg;
+  if (msg === 'Пользователь с таким email уже зарегистрирован!' ||
+    msg === 'Все поля должны быть заполнены!' ||
+    msg === 'Некорректный email!')
+    document.getElementById('errRegistration').innerHTML = msg;
   else if (result.status === 200) window.location = '/';
 
   /*   document.getElementById('errRegistration').innerHTML = msg;
@@ -30,12 +33,12 @@ document.getElementById('bnLogin').addEventListener('click', async () => {
     },
     body: JSON.stringify({ email, password }),
   });
-  console.log('ФЕЧ POST на /login ОТПРАВЛЕН, ЖДЁМ!');
+  // console.log('ФЕЧ POST на /login ОТПРАВЛЕН, ЖДЁМ!');
   const msg = await result.text();
 
   console.log(typeof (result.status), result.status);
 
-  if (msg === '_') window.location = '/';
+  if (msg === 'ok') window.location = '/';
   else document.getElementById('errLogin').innerHTML = msg;
   // else if (result.status === 200)
   // console.log('ФЕЧ POST на /login ОТПРАВЛЕН!');
