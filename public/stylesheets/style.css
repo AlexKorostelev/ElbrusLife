@@ -70,10 +70,12 @@ div.game {
 /* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #00B7FF;
 }
 
 a {
   color: #00B7FF;
+<<<<<<< HEAD
 } */
 
 <<<<<<< HEAD
@@ -88,4 +90,10 @@ a {
   margin: 50px;
   /* margin-right: 100px; */
 >>>>>>> 8e4df1f860196ceb6539c04d7869a5d26633f08a
+=======
+}
+
+.ok {
+  color: #f7310f;
+>>>>>>> 9045cabf04800788c027c9c4919f561410654df0
 }

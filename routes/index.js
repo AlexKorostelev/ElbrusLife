@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 /* Main page. */
 router.get('/', (req, res) => {
-  res.render('index', { title: 'Express' });
+  res.redirect('/schedules');
 });
 
 /* Авторизация */
