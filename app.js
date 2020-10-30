@@ -31,13 +31,13 @@ app.use(express.static(path.join(__dirname, 'public'))); // Public folder
 
 // middleware for session - saving cookies
 app.use(session({
-    store: new MongoStore({ // storing in mongodb via mongostore
-        mongooseConnection: mongoose.createConnection(process.env.DB_CONN, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }),
-    }),
-    secret: process.env.SECRET_KEY, // 'rg9ii645terg9hjio6k5elrpf',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false, maxAge: 999999999999999, httpOnly: false },
+  store: new MongoStore({ // storing in mongodb via mongostore
+    mongooseConnection: mongoose.createConnection(process.env.DB_CONN, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false }),
+  }),
+  secret: process.env.SECRET_KEY, // 'rg9ii645terg9hjio6k5elrpf',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, maxAge: 999999999999999, httpOnly: false },
 }));
 
 
@@ -49,12 +49,11 @@ app.use(async(req, res, next) => {
 
 // checking if user logged in (if username in req.session)
 function CheckUser(req, res, next) {
-    // eslint-disable-next-line no-use-before-define
-    const sessionUser = req.session?.user;
-    if (!sessionUser) {
-        return res.redirect('/');
-    }
-    next();
+  const sessionUser = req.session?.user;
+  if (!sessionUser) {
+    return res.redirect('/');
+  }
+  next();
 }
 
 app.use('/', indexRouter);
@@ -75,7 +74,7 @@ app.use((req, res, next) => {
 
 // log of error
 app.use((err) => {
-    console.error('err', err);
+  console.error('err', err);
 });
 
 app.listen(process.env.PORT, () => console.log(`Server is on ${process.env.PORT}`));
