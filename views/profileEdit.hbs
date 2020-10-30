@@ -3,40 +3,50 @@
 </div>
 <hr>
 <div class="aboutme">Основная информация</div>
- {{!-- FORM --}}
+{{!-- FORM --}}
 <form id="editForm" action="/profile/edit" method="POST" enctype="multipart/form-data">
-{{!-- multer for img - saves the img but keeps path in bd --}}
-{{#if imgsource}}
-<img id="avatarImg" src="/uploads/{{imgsource}}" style="width: 100px; height: 100px">
-{{else}}
-<img src="/uploads/defult.jpeg" alt="default logo" height="100px" width="100px">
-{{/if}}
-{{!-- message for err --}}
-{{message}}
-<input id="avatar" name="avatar" type="file" placeholder="Изменить фото" />
-<button id="deleteBtn" class="removephoto">Удалить фото</button>
-<div id="errMsg" class="errMsg"></div>
-{{!-- name type string --}}
-<label for="name">Имя</label>
-<input name="name" type="text" placeholder="Введите имя" value="{{name}}" />
-<br>
-<label for="surname">Фамилия</label>
-<input name="surname" type="text" value="{{surname}}" placeholder="Введите фамилию" />
-<br> {{!-- gender select --}}
-<label for="gender">Пол</label>
-<select name="usergender" id="usergender" value="{{gender}}">
-  <option value="other">другое</option>
-  <option value="male">мужской</option>
-  <option value="female">женский</option>
-  <option selected="selected">{{gender}}</option>
-</select>
-<br> {{!-- birthday type: date --}}
-<label for="birthday">День рождения</label>
-<input name="birthday" type="date" value="{{birthday}}" />
-<br> {{!-- email type email but in bd string --}}
-<label for="useremail">Email</label>
-<input name="email" type="email" placeholder="email" value="{{email}}"/>
-<br> {{!-- submit button --}}
-<button id="editBtn" type="submit">Сохранить</button>
+  {{!-- multer for img - saves the img but keeps path in bd --}}
+  {{#if imgsource}}
+  <img id="avatarImg" src="/uploads/{{imgsource}}" style="width: 100px; height: 100px">
+  {{else}}
+  <img src="/uploads/defult.jpeg" alt="default logo" height="100px" width="100px">
+  {{/if}}
+  {{!-- message for err --}}
+  {{message}}
+  <input id="avatar" name="avatar" type="file" placeholder="Изменить фото" />
+  <button id="deleteBtn" class="removephoto">Удалить фото</button>
+  <div id="errMsg" class="errMsg"></div>
+  {{!-- name type string --}}
+  {{!-- <label for="name">Имя</label> --}}
+
+
+  <div class="form-group">
+    <input name="name" type="text" placeholder="Введите имя" value="{{name}}" class="form-control" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Имя</small>
+  </div>
+  
+  <div class="form-group">
+    <input name="surname" type="text" placeholder="Введите фамилию" value="{{surname}}" class="form-control" aria-describedby="emailHelp">
+    <small id="emailHelp" class="form-text text-muted">Фамилия</small>
+  </div>
+
+{{!--   <label for="surname">Фамилия</label>
+  <input name="surname" type="text" value="{{surname}}" placeholder="Введите фамилию" /> --}}
+  <br> {{!-- gender select --}}
+  <label for="gender">Пол</label>
+  <select name="usergender" id="usergender" value="{{gender}}">
+    <option value="other">другое</option>
+    <option value="male">мужской</option>
+    <option value="female">женский</option>
+    <option selected="selected">{{gender}}</option>
+  </select>
+  <br> {{!-- birthday type: date --}}
+  <label for="birthday">День рождения</label>
+  <input name="birthday" type="date" value="{{birthday}}" />
+  <br> {{!-- email type email but in bd string --}}
+  <label for="useremail">Email</label>
+  <input name="email" type="email" placeholder="email" value="{{email}}" />
+  <br> {{!-- submit button --}}
+  <button id="editBtn" type="submit">Сохранить</button>
 </form>
 <script src="/js/profile.js"></script>

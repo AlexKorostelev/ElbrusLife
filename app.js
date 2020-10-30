@@ -1,5 +1,5 @@
 const express = require('express');
-const createError = require('http-errors');
+// const createError = require('http-errors');
 const path = require('path');
 const cookieParser = require('cookie-parser'); // to save cookie from client into req.cookies
 const mongoose = require('mongoose');
@@ -12,7 +12,7 @@ const indexRouter = require('./routes/index');
 const profileRouter = require('./routes/profile');
 const leaderBoardRouter = require('./routes/leaderboard');
 const schedulesRouter = require('./routes/schedules');
-const logger = require('morgan');
+// const logger = require('morgan');
 
 // mongoose connection
 mongoose.connect(process.env.DB_CONN, { useNewUrlParser: true, useUnifiedTopology: true, autoIndex: false }).then(() => console.log('Mongoose connected!')).catch(() => console.log('Error!'));

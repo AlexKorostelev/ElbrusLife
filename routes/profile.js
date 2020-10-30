@@ -83,7 +83,7 @@ router.get('/edit', (req, res) => {
     year = year.getUTCFullYear();
     birthDate = `${year}-${month}-${day}`;
   }
-  console.log(birthDate);
+
   res.render('profileEdit', {
     name: res.locals.user?.name,
     surname: res.locals.user?.surname,

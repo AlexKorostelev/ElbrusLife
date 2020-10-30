@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-mongoose.connect('mongodb://localhost:27017/schedule', { useNewUrlParser: true, useUnifiedTopology: true });
-
-
+mongoose.connect(process.env.DB_CONN, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Schedule = require('../models/schedule');
-
 
 const schedules = [
   {
