@@ -1,23 +1,22 @@
-// const newGame = document.getElementById('createNewGameForm');
 
-// const vinnerName = document.getElementById('vinnerName').innerText(); // ?????????
+const gameDelete = document.getElementById('myModalDelete');
+console.log("FEEEEETCH");
+const fetchButton  = document.getElementById("gameFormDelete");
+const formDelete  = document.getElementById("gameForDeleteSelect");
 
-// const opponentNameSelect = document.getElementById('opponentNameSelect');
+gameDelete.addEventListener('click', async () => {
+	// e.preventDefault()
+		const res = await fetch('/leaderboard/delete', {
+    method: 'DELETE',
+    body: JSON.stringify({
+    gameId: formDelete.options[formDelete.selectedIndex].value
+    }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+	});
 
-// newGame.addEventListener('submit', async (e) => {
-//   e.preventDefault();
-//   const res = await fetch('/leaderboard', {
-//     method: 'POST',
-//     body: JSON.stringify({
-//       gameName: newGame.gameName.value,
-//       idUserVinner: vinnerName.value,
-//       idUser2: opponentNameSelect.options[opponentNameSelect.selectedIndex].value,
-//       gameRank: newGame.gameRank.value,
-//     }),
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   });
-//   const data = await res.json();
-//   console.log(data);
-// });
+	const data = await res.json();
+	window.location.reload();
+  console.log(data);
+});

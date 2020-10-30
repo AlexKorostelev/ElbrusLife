@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
-
-mongoose.connect('mongodb://localhost:27017/elbruslife', { autoIndex: false, useNewUrlParser: true, useUnifiedTopology: true });
+require('dotenv').config();
+mongoose.connect(process.env.DB_CONN, { autoIndex: false, useNewUrlParser: true, useUnifiedTopology: true });
 
 const users = [{
   name: 'Burbu',

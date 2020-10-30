@@ -50,22 +50,29 @@ async function ShowSchedules(e) {
 
     for (let i = 0; i < response.lesson.length; i++) {
       const add = document.createElement('div');
+      add.classList.add("list-group-item")
       add.id = '' + response.lesson[i]._id;
+
+      const br = document.createElement('br');
 
       const edit = document.createElement('a');
       edit.text = "Редактировать";
+      edit.style = "margin-left: 50px"
+
       edit.href = `/schedules/${response._id}/${response.lesson[i]._id}`;
       edit.id = '' + response.lesson[i]._id;
 
       const del = document.createElement('a');
       del.text = "Удалить";
+      del.style = "margin-left: 50px"
       del.href = `/schedules/${response._id}/${response.lesson[i]._id}`;
       del.id = '' + response.lesson[i]._id;
       // console.log(ab);
 
-
       add.innerText = response.lesson[i].timeLesson + ' ' + response.lesson[i].nameLesson;
-      dd.append(add, edit, del);
+      add.append(br, edit, del)
+      dd.append(add);
+      // dd.append(br);
       // dd.append(edit);
       // dd.append(del);
     }
