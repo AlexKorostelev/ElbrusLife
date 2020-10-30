@@ -1,6 +1,5 @@
 const express = require('express');
 const User = require('../models/user');
-const db = require('../db/db');
 const GameList = require('../models/gameList');
 
 // const GameList = require('../models/gameList');
