@@ -4,49 +4,42 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 
-/* const checkUser = (req, res, next) => {
-  const sessionUser = req.session?.name;
-  console.log('SESSION_USER===>', sessionUser);
-  if (!sessionUser) {
-    // console.log('Пользователь не найден!!!');
-    return res.redirect('/login');
-  }
-  next();
-}; */
-
 /* Main page. */
 router.get('/', (req, res) => {
   res.render('index', { title: 'Express' });
 });
 
 /* Авторизация */
-router.get('/login', async (req, res, next) => {
+router.get('/login', async (req, res) => {
   res.redirect('/');
 });
 
-router.post('/login', async (req, res, next) => {
+router.post('/login', async (req, res) => {
   const user = req.body;
   const userdb = await User.findOne({ email: user.email });
-  // console.log('POST /login', userdb);
+  // console.log('POST /login', userdb.name, userdb.email, userdb.password);
 
   if (userdb) {
     if (userdb.password === user.password) {
       req.session.user = userdb;
-      // console.log('LOGIN, ПАРОЛЬ СОВПАЛ!!! ЗАЛОГИНИЛИСЬ КАК ===>', userdb.name);
-      return res.sendStatus(200);
+      console.log('LOGIN, ПАРОЛЬ СОВПАЛ!!! ЗАЛОГИНИЛИСЬ КАК ===>', userdb.name);
+      res.render('error', { message: '_', layout: false });
+      // res.sendStatus(200);
+      // res.status(200);
+    } else {
+      res.render('error', { message: 'Неверный логин / пароль!', layout: false });
     }
+  } else {
+    res.render('error', { message: 'Неверный логин / пароль!', layout: false }); // Юзер не найден
   }
-  // console.log('LOGIN, НЕВЕРНЫЙ ПАРОЛЬ!');
-  res.render('error', { message: 'Неверный логин / пароль!', layout: false });
 });
 
 /* Регистрация */
-router.get('/registration', async (req, res, next) => {
-  // res.render('registration');
+router.get('/registration', async (req, res) => {
   res.redirect('/');
 });
 
-router.post('/registration', async (req, res, next) => {
+router.post('/registration', async (req, res) => {
   const user = req.body; // Загружаем данные, переданные с фронта по fetch на POST-ручку
   const userExist = await User.findOne({ email: user.email }); // Ищем в базе юзера с подобным email
 
@@ -63,7 +56,7 @@ router.post('/registration', async (req, res, next) => {
 });
 
 /* Выход из профиля */
-router.get('/logout', async (req, res, next) => {
+router.get('/logout', async (req, res) => {
   // console.log('ЗАШЛИ В LOGOUT!');
   req.session.destroy(); // удаляем сессию
   res.redirect('/');

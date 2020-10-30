@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand">{{user.name}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link"> <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Главная</a>
+      </li>
+      {{#if user.name}}
+      <li class="nav-item">
+        <a class="nav-link" href="#">Курсы</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Развлечения</a>
+      </li>
+      {{/if}}
+    </ul>
+
+    <ul class="navbar-nav mr-right">
+      {{#if user.name}}
+      <li class="nav-item">
+        <a class="nav-link" href="/profile">Профиль</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Выход</a>
+      </li>
+      {{else}}
+      <li class="nav-item">
+        <a class="nav-link" href="/registration" data-toggle="modal" data-target="#modalRegisterForm">Регистрация</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/login" data-toggle="modal" data-target="#modalLoginForm">Вход</a>
+      </li>
+      {{/if}}
+    </ul>
+  </div>
+</nav>
+
+<div style="background-color: darkgray; height: 200px;"></div>
