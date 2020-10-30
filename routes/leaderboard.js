@@ -36,10 +36,7 @@ router.post('/', async(req, res) => {
 //
 router.delete('/delete', async(req, res) => {
 	const {gameId} = req.body
-	console.log('DELETE', gameId);
-// await GameList.findOneAndDelete(gameId, (err) => {
-// 	if (err) { return err; } return res.redirect("/leaderboard");
-// });
+	// console.log('DELETE', gameId);
 await GameList.findOneAndDelete(gameId)
 return res.redirect("/leaderboard")
 });

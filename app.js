@@ -9,7 +9,6 @@ const hbs = require('hbs');
 require('dotenv').config();
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const profileRouter = require('./routes/profile');
 const leaderBoardRouter = require('./routes/leaderboard');
 const schedulesRouter = require('./routes/schedules');
@@ -42,9 +41,10 @@ app.use(session({
 
 
 // middleware to create res locals so we can get user info on any route
-app.use(async(req, res, next) => {
-    res.locals.user = req.session?.user;
-    next();
+app.use(async (req, res, next) => {
+  res.locals.user = req.session?.user;
+  // console.log(res.locals.user, 'RES LOCALS MIDDLEWARE USER');
+  next();
 });
 
 // checking if user logged in (if username in req.session)
@@ -57,7 +57,6 @@ function CheckUser(req, res, next) {
 }
 
 app.use('/', indexRouter);
-app.use('/users', CheckUser, usersRouter);
 app.use('/profile', CheckUser, profileRouter);
 app.use('/leaderboard', CheckUser, leaderBoardRouter);
 app.use('/schedules', schedulesRouter);
@@ -65,16 +64,11 @@ app.use('/schedules', schedulesRouter);
 app.use((req, res, next) => {
     next();
 });
-// app.use(
-//   (req, res, next) => {
-//     res.locals.username = schedules.lesson;
-//     next();
-//   }
-// )
+
 
 // log of error
-// app.use((err) => {
-//   console.error('err', err);
-// });
+/* app.use((err) => {
+  console.error('err', err);
+}); */
 
 app.listen(process.env.PORT, () => console.log(`Server is on ${process.env.PORT}`));
