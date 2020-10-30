@@ -62,8 +62,7 @@ app.use('/leaderboard', CheckUser, leaderBoardRouter);
 app.use('/schedules', schedulesRouter);
 // catch 404
 app.use((req, res, next) => {
-  console.log('>>>>>', req.url, '<<<<< 404 - ROUTE not found!');
-  next();
+    next();
 });
 
 

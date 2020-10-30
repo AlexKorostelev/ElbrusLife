@@ -1,12 +1,10 @@
-<<<<<<< HEAD
-=======
+
 body {
-  padding: 50px;
+  /* padding: 50px; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #0509c7;
 }
 
->>>>>>> 35efd530b0c6130e2823603392b9165c9bfaeecb
 a {
   color: hsl(0, 0%, 0%);
 }
@@ -39,6 +37,19 @@ div.game {
     font-size: 2em;
 }
 
+.wrapper2 {
+	display: column;
+	justify-content: center;
+	width: 100%;
+	height: 384px;
+	background-image: url(/img/F5C5D2A8-7520-4E76-81EA-69586FCB65B5.jpg);
+	background-blend-mode: multiply;
+	background-color: #e9ecef;
+	background-size: contain;
+	text-align: center;
+	color: #fff;
+	font-size: 2em;
+}
 @media (min-width: 1001px) {
     #top {
         font-size: 3em;
@@ -70,4 +81,11 @@ div.game {
 
 .ok {
   color: #f7310f;
+}
+
+
+.list-group-item{
+	margin: auto;
+	width: 750px;
+height: 80px;
 }
